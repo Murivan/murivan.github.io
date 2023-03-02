@@ -9,7 +9,7 @@
         let pyodide = await loadPyodide();
         await pyodide.loadPackage("micropip");
         const micropip = pyodide.pyimport("micropip");
-        micropip.install('https://murivan.github.io/blob/main/test_dmurivan-0.0.1-py3-none-any.whl')
+        micropip.install('https://murivan.github.io/test_dmurivan-0.0.1-py3-none-any.whl')
         await pyodide.runPython(`
        import test_dmurivan
        result = test_dmurivan.cnshcd_builder(3,5)
