@@ -17,6 +17,14 @@
     <textarea id="output" style="width: 100%;" rows="6" disabled></textarea>
 
     <script>
+    // Downloading an archive
+await pyodide.runPythonAsync(`
+    from pyodide.http import pyfetch
+    response = await pyfetch("https://murivan.github.io/test_dmurivan-0.0.1-py3-none-any.whl") # .zip, .whl, ...
+    await response.unpack_archive() # by default, unpacks to the current dir
+`)
+pkg = pyodide.pyimport("test_dmurivan");
+result=pkg.cnshcd_builder(3,5);
       const output = document.getElementById("output");
       const code = document.getElementById("code");
 
