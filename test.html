@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <script src="https://cdn.jsdelivr.net/pyodide/dev/full/pyodide.js"></script>
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.22.1/full/pyodide.js"></script>
   </head>
 
   <body>
@@ -17,12 +17,6 @@
     <textarea id="output" style="width: 100%;" rows="6" disabled></textarea>
 
     <script>
-    // Downloading an archive
-await pyodide.runPythonAsync(`
-    from pyodide.http import pyfetch
-`)
-pkg = pyodide.pyimport("test_dmurivan");
-result=pkg.cnshcd_builder(3,5);
       const output = document.getElementById("output");
       const code = document.getElementById("code");
 
