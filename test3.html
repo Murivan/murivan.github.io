@@ -45,7 +45,7 @@
         let pyodide = await pyodideReadyPromise;
         try {
           let output = pyodide.runPython(`
-from cshcd_schroederm import cnshcd_builder
+from cnshcd_schroederm import cnshcd_builder
 result=cnshcd_builder.entrypoint('3','5','s')
           `);
           addToOutput(output);
