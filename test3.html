@@ -35,7 +35,7 @@
         let pyodide = await loadPyodide();
         await pyodide.loadPackage("micropip");
         const micropip = pyodide.pyimport("micropip");
-        await micropip.install('https://murivan.github.io/cnshcd_schroederm-0.0.9-py3-none-any.whl');
+        await micropip.install('https://murivan.github.io/cnshcd_schroederm-1.0.0-py3-none-any.whl');
         output.value += "Ready!\n";
         return pyodide;
       }
