@@ -46,7 +46,7 @@
         try {
           let output = pyodide.runPython(`
 from cshcd_schroederm import cnshcd_builder
-result=cnshcd_builder('3','5','s')
+result=entrypoint('3','5','s')
           `);
           addToOutput(output);
         } catch (err) {
