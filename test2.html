@@ -11,8 +11,8 @@
         const micropip = pyodide.pyimport("micropip");
         await micropip.install('https://murivan.github.io/cshcd_schroederm-0.0.9-py3-none-any.whl');
         await pyodide.runPython(`
-from cshcd_schroederm import cnshcd_builder
-result=entrypoint('3','5','s')
+from cshcd_schroederm import *
+result=cnshcd_builder.entrypoint('3','5','s')
 print(result)
       `);
       }

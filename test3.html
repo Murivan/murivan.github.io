@@ -45,8 +45,8 @@
         let pyodide = await pyodideReadyPromise;
         try {
           let output = pyodide.runPython(`
-from cshcd_schroederm import cnshcd_builder
-result=entrypoint('3','5','s')
+from cshcd_schroederm import *
+result=cnshcd_builder.entrypoint('3','5','s')
           `);
           addToOutput(output);
         } catch (err) {
