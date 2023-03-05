@@ -20,6 +20,8 @@ With this program, you may produce a cyclic, symmetric HCD of K_{m x n} for a pa
 	<br />
     <button onclick="evaluateChart()">Draw Charts</button>
     <br />
+    <button onclick="evaluateRestart()">Restart</button>
+    <br />
     <div>Output:</div>
     <textarea id="output" style="width: 100%;" rows="100" disabled></textarea>
 
@@ -30,6 +32,10 @@ With this program, you may produce a cyclic, symmetric HCD of K_{m x n} for a pa
         output.value += ">>>" + s + "\n";
       }
 
+      async function evaluateRestart(){
+        location.reload();
+return false;
+      }
       output.value = "Initializing...\n";
       // init Pyodide
       async function main() {
@@ -43,7 +49,6 @@ With this program, you may produce a cyclic, symmetric HCD of K_{m x n} for a pa
         import io
         sys.stdout = io.StringIO()`); 
         output.value += "Ready!\n";
-		
         return pyodide;
       }
       let pyodideReadyPromise = main();
@@ -68,12 +73,17 @@ With this program, you may produce a cyclic, symmetric HCD of K_{m x n} for a pa
       const m = document.getElementById("m");
 	    const n = document.getElementById("n");
       const s = document.getElementById("s");
-      if (s==='s'){
+      if (s.value==="s"){
       const c = document.getElementById("c");
-	  const runFunction="cnshcd_builder.displayChart('" + m.value + "','" + n.value + "','" + c.value + "','" + pyodide.globals.get('S')+ "')";
-        let pyodide = await pyodideReadyPromise;
+      if(c.value===""){
+        return
+      }
+      let pyodide = await pyodideReadyPromise;
+      output.value="";
+	    const runFunction="cnshcd_builder.displayChart('" + m.value + "','" + n.value + "','" + c.value + "','" + pyodide.globals.get('S')+ "')";
         try {
          let output = pyodide.runPython(runFunction);
+         
          var stdout = pyodide.runPython("sys.stdout.getvalue()");
 		  addToOutput(stdout);
         } catch (err) {
