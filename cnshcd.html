@@ -68,7 +68,7 @@ With this program, you may produce a cyclic, symmetric HCD of K_{m x n} for a pa
       const s = document.getElementById("s");
       if (s==='s'){
       const c = document.getElementById("c");
-	  const runFunction="cnshcd_builder.displayChart('" + c.value+ "')";
+	  const runFunction="cnshcd_builder.displayChart('" + m.value + "','" + n.value + "','" + s.value + "','" + pyodide.globals.get('S')+ "')";
         let pyodide = await pyodideReadyPromise;
         try {
          let output = pyodide.runPython(runFunction);
