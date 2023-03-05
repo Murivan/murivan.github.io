@@ -14,8 +14,11 @@ With this program, you may produce a cyclic, symmetric HCD of K_{m x n} for a pa
 	<br />
     Print the base paths -- complete, sufficient, or neither (c/s/n):<input id="s" value="" />
 	<br />
-    <button onclick="evaluatePython()">Go</button>
+    <button onclick="evaluateBasePaths()">Start</button>
     <br />
+    Edge Length Chart number?<input id="c" value="" />
+	<br />
+    <button onclick="evaluateChart()">Draw Charts</button>
     <br />
     <div>Output:</div>
     <textarea id="output" style="width: 100%;" rows="100" disabled></textarea>
@@ -35,24 +38,24 @@ With this program, you may produce a cyclic, symmetric HCD of K_{m x n} for a pa
         const micropip = pyodide.pyimport("micropip");
         await micropip.install('https://murivan.github.io/cnshcd_schroederm-1.0.0-py3-none-any.whl');
 		await pyodide.runPython(`from cnshcd_schroederm import cnshcd_builder`);
+		await pyodide.runPython(`
+        import sys
+        import io
+        sys.stdout = io.StringIO()`); 
         output.value += "Ready!\n";
 		
         return pyodide;
       }
       let pyodideReadyPromise = main();
 
-      async function evaluatePython() {
+      async function evaluateBasePaths() {
       output.value="";
 	  const m = document.getElementById("m");
 	  const n = document.getElementById("n");
       const s = document.getElementById("s");
-	  const runFunction="cnshcd_builder.entrypoint('" + m.value + "','" + n.value + "','" + s.value + "')";;
+	  const runFunction="cnshcd_builder.entrypoint('" + m.value + "','" + n.value + "','" + s.value + "')";
         let pyodide = await pyodideReadyPromise;
         try {
-        pyodide.runPython(`
-        import sys
-        import io
-        sys.stdout = io.StringIO()`); 
          let output = pyodide.runPython(runFunction);
          var stdout = pyodide.runPython("sys.stdout.getvalue()");
 		  addToOutput(stdout);
@@ -60,6 +63,22 @@ With this program, you may produce a cyclic, symmetric HCD of K_{m x n} for a pa
           addToOutput(err);
         }
       }
+      
+      async function evaluateChart() {
+      const s = document.getElementById("s");
+      if (s='c'){
+      const c = document.getElementById("c");
+	  const runFunction="cnshcd_builder.displayChart('" + c.value+ "')";
+        let pyodide = await pyodideReadyPromise;
+        try {
+         let output = pyodide.runPython(runFunction);
+         var stdout = pyodide.runPython("sys.stdout.getvalue()");
+		  addToOutput(stdout);
+        } catch (err) {
+          addToOutput(err);
+        }
+        }
+        }
     </script>
   </body>
 </html>
