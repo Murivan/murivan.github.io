@@ -52,7 +52,7 @@ With this program, you may produce a cyclic, symmetric HCD of K_{m x n} for a pa
       output.value="";
 	  const m = document.getElementById("m");
 	  const n = document.getElementById("n");
-      const s = document.getElementById("s");
+    const s = document.getElementById("s");
 	  const runFunction="cnshcd_builder.entrypoint('" + m.value + "','" + n.value + "','" + s.value + "')";
         let pyodide = await pyodideReadyPromise;
         try {
@@ -65,6 +65,8 @@ With this program, you may produce a cyclic, symmetric HCD of K_{m x n} for a pa
       }
       
       async function evaluateChart() {
+      const m = document.getElementById("m");
+	    const n = document.getElementById("n");
       const s = document.getElementById("s");
       if (s==='s'){
       const c = document.getElementById("c");
